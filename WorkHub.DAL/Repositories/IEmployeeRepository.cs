@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkHub.DAL.Models;
+﻿using WorkHub.DAL.Models;
 
-namespace WorkHub.DAL.Repository_Interfaces
+namespace WorkHub.DAL.Repositories
 {
     public interface IEmployeeRepository
     {

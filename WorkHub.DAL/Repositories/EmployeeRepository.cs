@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WorkHub.DAL.Models;
-using WorkHub.DAL.Repository_Interfaces;
 using ApplicationContext = WorkHub.DAL.Context.ApplicationContext;
 
-namespace WorkHub.DAL.Repository_Classes
+namespace WorkHub.DAL.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {

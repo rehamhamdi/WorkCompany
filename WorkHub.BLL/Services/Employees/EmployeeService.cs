@@ -2,11 +2,10 @@
 using Microsoft.Extensions.Logging;
 using WorkHub.BLL.DTOs;
 using WorkHub.BLL.Result_Pattern;
-using WorkHub.BLL.ServiceInterface;
 using WorkHub.DAL.Models;
-using WorkHub.DAL.Repository_Interfaces;
+using WorkHub.DAL.Repositories;
 
-namespace WorkHub.BLL.ServiceClass
+namespace WorkHub.BLL.Services.Employees
 {
     public class EmployeeService : IEmployeeService
     {

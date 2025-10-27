@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkHub.BLL.DTOs;
+﻿using WorkHub.BLL.DTOs;
 using WorkHub.BLL.Result_Pattern;
-using WorkHub.DAL.Models;
 
-namespace WorkHub.BLL.ServiceInterface
+namespace WorkHub.BLL.Services.Employees
 {
     public interface IEmployeeService
     {

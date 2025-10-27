@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WorkHub.BLL.DTOs;
-using WorkHub.BLL.ServiceInterface;
+using WorkHub.BLL.Services.Employees;
 
 namespace WorkHub.API.Controllers
 {

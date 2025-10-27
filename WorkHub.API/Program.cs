@@ -6,10 +6,8 @@ using Serilog.Events;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Reflection;
 using WorkHub.BLL.Mapping;
-using WorkHub.BLL.ServiceClass;
-using WorkHub.BLL.ServiceInterface;
-using WorkHub.DAL.Repository_Classes;
-using WorkHub.DAL.Repository_Interfaces;
+using WorkHub.BLL.Services.Employees;
+using WorkHub.DAL.Repositories;
 using ApplicationContext = WorkHub.DAL.Context.ApplicationContext;
 
 namespace WorkHub.API
