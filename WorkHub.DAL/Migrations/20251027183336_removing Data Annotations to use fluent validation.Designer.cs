@@ -6,15 +6,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkHub.DAL.Context;
-using ApplicationContext = WorkHub.DAL.Context.ApplicationContext;
 
 #nullable disable
 
 namespace WorkHub.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20251003182214_init")]
-    partial class init
+    [Migration("20251027183336_removing Data Annotations to use fluent validation")]
+    partial class removingDataAnnotationstousefluentvalidation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,7 +261,6 @@ namespace WorkHub.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JobTitle")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

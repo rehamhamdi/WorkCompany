@@ -1,19 +1,16 @@
 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
-using System.Text;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+using System.Reflection;
 using WorkHub.BLL.Mapping;
 using WorkHub.BLL.ServiceClass;
 using WorkHub.BLL.ServiceInterface;
-using WorkHub.DAL.Context;
-using WorkHub.DAL.Models;
 using WorkHub.DAL.Repository_Classes;
 using WorkHub.DAL.Repository_Interfaces;
-using AppContext = WorkHub.DAL.Context.AppContext;
+using ApplicationContext = WorkHub.DAL.Context.ApplicationContext;
 
 namespace WorkHub.API
 {
@@ -30,27 +27,30 @@ namespace WorkHub.API
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)// it is preferable to do any additional Configuration like this line in  appsettings.json file
             .WriteTo.Console()
-            .WriteTo.File("Log/log.txt", rollingInterval:RollingInterval.Day)
+            .WriteTo.File("Log/log.txt", rollingInterval: RollingInterval.Day)
             .CreateLogger();
 
             builder.Host.UseSerilog();
 
 
             //Register Database
-            builder.Services.AddDbContext<AppContext>(options =>
+            builder.Services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStr"));
             });
+            //Fluent Validation
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             ////for Registerint userManger Service
             //builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppContext>();
+
             ////Configure Authentication + JWT
             //builder.Services.AddAuthentication(options =>
             //{
             //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; //change cookie from default to token
             //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; //return unauthrized response
             //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-
             //}).AddJwtBearer(options =>
             //{
             //    options.SaveToken = true;
@@ -76,6 +76,7 @@ namespace WorkHub.API
             //        op.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             //    });
             //});
+
             //for using AutoMapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -85,7 +86,6 @@ namespace WorkHub.API
 
             //Register SignalR
             //builder.Services.AddSignalR();
-
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
@@ -104,7 +104,7 @@ namespace WorkHub.API
                 app.MapOpenApi();
 
             }
-            app.UseSerilogRequestLogging(); 
+            app.UseSerilogRequestLogging();
             app.UseCors("allowFlutterApp");
             app.UseAuthorization();
             app.MapControllers();

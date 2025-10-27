@@ -1,22 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkHub.DAL.Context;
 using WorkHub.DAL.Models;
 using WorkHub.DAL.Repository_Interfaces;
-using AppContext = WorkHub.DAL.Context.AppContext;
+using ApplicationContext = WorkHub.DAL.Context.ApplicationContext;
 
 namespace WorkHub.DAL.Repository_Classes
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly AppContext _context;
+        private readonly ApplicationContext _context;
         private readonly ILogger<EmployeeRepository> _logger;
 
-        public EmployeeRepository(AppContext context, ILogger<EmployeeRepository> logger)
+        public EmployeeRepository(ApplicationContext context, ILogger<EmployeeRepository> logger)
         {
             _context = context;
             _logger = logger;
@@ -46,7 +41,7 @@ namespace WorkHub.DAL.Repository_Classes
 
         public async Task<Employee> GetEmployeeByIdAsync(int employeeId)
         {
-            
+
             return await _context.Employees.FindAsync(employeeId);
 
         }
